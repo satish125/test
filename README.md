@@ -1209,6 +1209,18 @@
 $( document ).ready(function() 
 {    
 $('#maintab').hide();
+var load_tabs=['LOAD_TAB1_CASE_MANAGEMENT.do','LOAD_TAB2_CASE_MANAGEMENT.do','LOAD_TAB3_CASE_MANAGEMENT.do',
+'LOAD_TAB4_CASE_MANAGEMENT.do','LOAD_TAB5_CASE_MANAGEMENT.do','LOAD_TAB6_CASE_MANAGEMENT.do','LOAD_TAB7_CASE_MANAGEMENT.do',
+'LOAD_TAB8_CASE_MANAGEMENT.do','LOAD_TAB9_CASE_MANAGEMENT.do','LOAD_TAB10_CASE_MANAGEMENT.do','LOAD_TAB11_CASE_MANAGEMENT.do'];
+
+var save_tabs=['SAVE_TAB1_CASE_MANAGEMENT.do','SAVE_TAB2_CASE_MANAGEMENT.do','SAVE_TAB3_CASE_MANAGEMENT.do',
+'SAVE_TAB4_CASE_MANAGEMENT.do','SAVE_TAB5_CASE_MANAGEMENT.do','SAVE_TAB6_CASE_MANAGEMENT.do','SAVE_TAB7_CASE_MANAGEMENT.do',
+'SAVE_TAB8_CASE_MANAGEMENT.do','SAVE_TAB9_CASE_MANAGEMENT.do','SAVE_TAB10_CASE_MANAGEMENT.do','SAVE_TAB11_CASE_MANAGEMENT.do'];
+
+var delete_tabs=['DELETE_TAB1_CASE_MANAGEMENT.do','DELETE_TAB2_CASE_MANAGEMENT.do','DELETE_TAB3_CASE_MANAGEMENT.do',
+'DELETE_TAB4_CASE_MANAGEMENT.do','DELETE_TAB5_CASE_MANAGEMENT.do','DELETE_TAB6_CASE_MANAGEMENT.do','DELETE_TAB7_CASE_MANAGEMENT.do',
+'DELETE_TAB8_CASE_MANAGEMENT.do','DELETE_TAB9_CASE_MANAGEMENT.do','DELETE_TAB10_CASE_MANAGEMENT.do','DELETE_TAB11_CASE_MANAGEMENT.do'];
+
 //$('#ProgramPOCSentTo').textbox('textbox').attr('maxlength',50)
 //$('#rfiNotes').textbox('textbox').attr('maxlength',500)
 				
@@ -1241,6 +1253,8 @@ $.ajaxSetup({
 });
 });
 
+//Load all the tabs on the tab click
+
 $('#maintab').tabs({
 onSelect:function(title,index)
 {
@@ -1251,7 +1265,7 @@ onSelect:function(title,index)
 		
 		if (index==0)
 		{
-		$('#ff1').form('load','LOAD_TAB1_CASE_MANAGEMENT.do?projectid='+selected);
+		$('#ff1').form('load',load_tabs[0]+'?projectid='+selected);
 		}
 		else if (index==1)
 		{
@@ -1266,7 +1280,7 @@ onSelect:function(title,index)
 			}
 			else
 			{
-			$('#dg_rfi').datagrid({ url: 'LOAD_TAB3_CASE_MANAGEMENT.do?projectid='+selected});	
+			$('#dg_rfi').datagrid({ url: load_tabs[2]+'?projectid='+selected});	
 			}
 		}
 		else if (index==3)
@@ -1278,7 +1292,7 @@ onSelect:function(title,index)
 			}
 			else
 			{
-				$('#dgstatus').datagrid({ url: 'LOAD_TAB4_CASE_MANAGEMENT.do?projectid='+selected});
+				$('#dgstatus').datagrid({ url: load_tabs[3]+'?projectid='+selected});
 			}
 		}
 		else if (index==4)
@@ -1291,7 +1305,7 @@ onSelect:function(title,index)
 			}
 			else
 			{
-				$('#dgconsult').datagrid({ url: 'LOAD_TAB5_CASE_MANAGEMENT.do?projectid='+selected});
+				$('#dgconsult').datagrid({ url: load_tabs[4]+'?projectid='+selected});
 			}
 		}
 		else if (index==5)
@@ -1303,7 +1317,7 @@ onSelect:function(title,index)
 			}
 			else
 			{
-				$('#dgshpo').datagrid({ url: 'LOAD_TAB6_CASE_MANAGEMENT.do?projectid='+selected});
+				$('#dgshpo').datagrid({ url: load_tabs[5]+'?projectid='+selected});
 			}
 		}
 		else if (index==6)
@@ -1315,7 +1329,7 @@ onSelect:function(title,index)
 			}
 			else
 			{
-				$('#dgtribal').datagrid({ url: 'LOAD_TAB7_CASE_MANAGEMENT.do?projectid='+selected});
+				$('#dgtribal').datagrid({ url: load_tabs[6]+'?projectid='+selected});
 			}
 		}
 		else if (index==7)
@@ -1327,7 +1341,7 @@ onSelect:function(title,index)
 			}
 			else
 			{
-				$('#dgintletter').datagrid({ url: 'LOAD_TAB8_CASE_MANAGEMENT.do?projectid='+selected});
+				$('#dgintletter').datagrid({ url: load_tabs[7]+'?projectid='+selected});
 			}
 		
 		}
@@ -1340,7 +1354,7 @@ onSelect:function(title,index)
 			}
 			else
 			{
-				$('#dgexorder').datagrid({ url: 'LOAD_TAB9_CASE_MANAGEMENT.do?projectid='+selected});
+				$('#dgexorder').datagrid({ url: load_tabs[8]+'?projectid='+selected});
 			}
 		}
 		else if (index==9)
@@ -1352,7 +1366,7 @@ onSelect:function(title,index)
 			}
 			else
 			{
-				$('#dgallow106').datagrid({ url: 'LOAD_TAB10_CASE_MANAGEMENT.do?projectid='+selected});
+				$('#dgallow106').datagrid({ url: load_tabs[9]+'?projectid='+selected});
 			}
 		}
 		else if (index==10)
@@ -1364,28 +1378,31 @@ onSelect:function(title,index)
 			}
 			else
 			{
-				$('#dgotherallow').datagrid({ url: 'LOAD_TAB11_CASE_MANAGEMENT.do?projectid='+selected});
+				$('#dgotherallow').datagrid({ url: load_tabs[10]+'?projectid='+selected});
 			}
 		}
 	}
 }
 });
+//Load End
 
 $("case").submit(function(event){
 event.preventDefault();
 });
+
+//Save click of all the buttons
 function saveform(bt)
 {
 var selected=$('#selectedprojectid').val();
 if (bt.id=="saveform1") 
 	{
 	togglefields(false);
-	$('#ff1').form('submit',{url:'SAVE_TAB1_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+	$('#ff1').form('submit',{url:save_tabs[0]+'?CASEMGMNTID='+selected});
 	togglefields(true);
 	}
 else if (bt.id=="saveform2") 
 {
-	$('#ff2').form('submit',{url:'SAVE_TAB2_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+	$('#ff2').form('submit',{url:save_tabs[1]+'?CASEMGMNTID='+selected});
 	var message="EHP Review/FONSI saved successfully.";
 }	
 else if (bt.id=="rfisave") 
@@ -1394,7 +1411,7 @@ else if (bt.id=="rfisave")
 	{
 		$('#rfiId').val(0);
 	}
-	$('#fmrfi').form('submit',{url:'SAVE_TAB3_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+	$('#fmrfi').form('submit',{url:save_tabs[2]+'?CASEMGMNTID='+selected});
 	var message="RFI saved successfully.";
 	$('#rfidlg').dialog('close');
 	$('#dg_rfi').datagrid('reload');    
@@ -1406,7 +1423,7 @@ else if (bt.id=="statussave")
 	{
 		$('#statusId').val(0);
 	}
-	$('#fmstatus').form('submit',{url:'SAVE_TAB4_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+	$('#fmstatus').form('submit',{url:save_tabs[3]+'?CASEMGMNTID='+selected});
 	$('#dlgstatus').dialog('close');
 	$('#dgstatus').datagrid('reload'); 
 	
@@ -1417,7 +1434,7 @@ else if (bt.id=="consusave")
 	{
 		$('#consultationId').val(0);
 	}
-	$('#fmcons').form('submit',{url:'SAVE_TAB5_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+	$('#fmcons').form('submit',{url:save_tabs[4]+'?CASEMGMNTID='+selected});
 	$('#dlgconsult').dialog('close');
 	$('#dgconsult').datagrid('reload'); 
 	
@@ -1430,7 +1447,7 @@ else if (bt.id=="shposave")
 	{
 		$('#shpoConsultId').val(0);
 	}
-	$('#fmshpo').form('submit',{url:'SAVE_TAB6_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+	$('#fmshpo').form('submit',{url:save_tabs[5]+'?CASEMGMNTID='+selected});
 	$('#dlgshpo').dialog('close');
 	$('#dgshpo').datagrid('reload'); 
 }
@@ -1440,7 +1457,7 @@ else if (bt.id=="tribalsave")
 	{
 		$('#thpoConsultId').val(0);
 	}
-	$('#fmtribal').form('submit',{url:'SAVE_TAB7_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+	$('#fmtribal').form('submit',{url:save_tabs[6]+'?CASEMGMNTID='+selected});
 	$('#dlgtribal').dialog('close');
 	$('#dgtribal').datagrid('reload'); 
 	
@@ -1451,7 +1468,7 @@ else if (bt.id=="intlettersave")
 	{
 		$('#letterId').val(0);
 	}
-	$('#fmintletter').form('submit',{url:'SAVE_TAB8_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+	$('#fmintletter').form('submit',{save_tabs[7]+'?CASEMGMNTID='+selected});
 	$('#dlgintletter').dialog('close');
 	$('#dgintletter').datagrid('reload'); 
 }
@@ -1463,7 +1480,7 @@ else if (bt.id=="exordersave")
 	{
 		$('#execOrderId').val(0);
 	}
-	$('#fmexorder').form('submit',{url:'SAVE_TAB9_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+	$('#fmexorder').form('submit',{url:save_tabs[8]+'?CASEMGMNTID='+selected});
 	$('#dlgexorder').dialog('close');
 	$('#dgexorder').datagrid('reload'); 
 	
@@ -1474,7 +1491,7 @@ else if (bt.id=="allow106save")
 	{
 		$('#allowanceId').val(0);
 	}
-	$('#fmallow106').form('submit',{url:'SAVE_TAB10_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+	$('#fmallow106').form('submit',{save_tabs[9]+'?CASEMGMNTID='+selected});
 	$('#dlgallow106').dialog('close');
 	$('#dgallow106').datagrid('reload'); 
 	
@@ -1485,7 +1502,7 @@ else if (bt.id=="otherallowsave")
 	{
 		$('#allowanceId').val(0);
 	}
-	$('#fmotherallow').form('submit',{url:'SAVE_TAB11_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+	$('#fmotherallow').form('submit',{save_tabs[10]+'?CASEMGMNTID='+selected});
 	$('#dlgotherallow').dialog('close');
 	$('#dgotherallow').datagrid('reload'); 
 
@@ -1567,7 +1584,7 @@ var row = $('#dg_rfi').datagrid('getSelected');
 if (row)
 {
 $('#fmrfi').form('load',row);
-$('#fmrfi').form('submit',{url:'DELETE_TAB3_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+$('#fmrfi').form('submit',{url:delete_tabs[3]+'?CASEMGMNTID='+selected});
 $('#dg_rfi').datagrid('reload');    
 }
 }
@@ -1590,7 +1607,7 @@ var row = $('#dgstatus').datagrid('getSelected');
 if (row)
 {
 $('#fmstatus').form('load',row);
-$('#fmstatus').form('submit',{url:'DELETE_TAB4_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+$('#fmstatus').form('submit',{url:delete_tabs[4]+'?CASEMGMNTID='+selected});
 $('#dgstatus').datagrid('reload');    
 }
 }
@@ -1614,7 +1631,7 @@ var row = $('#dgconsult').datagrid('getSelected');
 if (row)
 {
 $('#fmcons').form('load',row);
-$('#fmcons').form('submit',{url:'DELETE_TAB5_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+$('#fmcons').form('submit',{url:delete_tabs[4]+'?CASEMGMNTID='+selected});
 $('#dgconsult').datagrid('reload');    
 }
 }
@@ -1638,7 +1655,7 @@ var row = $('#dgshpo').datagrid('getSelected');
 if (row)
 {
 $('#fmshpo').form('load',row);
-$('#fmshpo').form('submit',{url:'DELETE_TAB6_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+$('#fmshpo').form('submit',{url:delete_tabs[5]+'?CASEMGMNTID='+selected});
 $('#dgshpo').datagrid('reload');    
 }
 }
@@ -1661,7 +1678,7 @@ var row = $('#dgtribal').datagrid('getSelected');
 if (row)
 {
 $('#fmtribal').form('load',row);
-$('#fmtribal').form('submit',{url:'DELETE_TAB7_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+$('#fmtribal').form('submit',{url:delete_tabs[6]+'?CASEMGMNTID='+selected});
 $('#dgtribal').datagrid('reload');    
 }
 }
@@ -1687,7 +1704,7 @@ var row = $('#dgintletter').datagrid('getSelected');
 if (row)
 {
 $('#fmintletter').form('load',row);
-$('#fmintletter').form('submit',{url:'DELETE_TAB8_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+$('#fmintletter').form('submit',{url:delete_tabs[7]+'?CASEMGMNTID='+selected});
 $('#dgintletter').datagrid('reload');    
 }
 }
@@ -1710,7 +1727,7 @@ var row = $('#dgexorder').datagrid('getSelected');
 if (row)
 {
 $('#fmexorder').form('load',row);
-$('#fmexorder').form('submit',{url:'DELETE_TAB9_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+$('#fmexorder').form('submit',{url:delete_tabs[8]+'?CASEMGMNTID='+selected});
 $('#dgexorder').datagrid('reload');    
 }
 }
@@ -1733,7 +1750,7 @@ var row = $('#dgallow106').datagrid('getSelected');
 if (row)
 {
 $('#fmallow106').form('load',row);
-$('#fmallow106').form('submit',{url:'DELETE_TAB10_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+$('#fmallow106').form('submit',{url:delete_tabs[9]+'?CASEMGMNTID='+selected});
 $('#dgallow106').datagrid('reload');    
 }
 }
@@ -1756,7 +1773,7 @@ var row = $('#dgotherallow').datagrid('getSelected');
 if (row)
 {
 $('#fmotherallow').form('load',row);
-$('#fmotherallow').form('submit',{url:'DELETE_TAB11_CASE_MANAGEMENT.do?CASEMGMNTID='+selected});
+$('#fmotherallow').form('submit',{url:delete_tabs[10]+'?CASEMGMNTID='+selected});
 $('#dgotherallow').datagrid('reload');    
 }
 }
