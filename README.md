@@ -1152,7 +1152,7 @@
 										<th field="notes" width="300">Notes</th>
 										<th field="estCostSavings" >Estimated Cost Savings</th>
 										<th field="estTimeSavings" >Estimated Time Savings</th>
-										<th field="allowanceId" width="50px" hidden="true"></th>
+										<th field="othallowanceId" width="50px" hidden="true"></th>
 										</tr>
 										</thead>
 										</table>
@@ -1192,8 +1192,7 @@
 											<label style="font-weight:bold;">Estimated Time Savings:</label>
 											<input name="estTimeSavings" class="easyui-numberbox"  style="width:100px" data-options="precision:0,groupSeparator:',',decimalSeparator:'.',prefix:'$'"></input>
 											</div>
-											<input type="hidden" id="allowanceId" name="allowanceId" value="0" />  
-											<input type="hidden" id="otherallowanceId" name="allowanceId" value="0" />  
+											<input type="hidden" id="othallowanceId" name="allowanceId" value="0" />  
 										</form>
 										</div>
 									<div id="dlg-buttons">
@@ -1206,6 +1205,7 @@
 </div>
 
 <script>
+//@SerializedName("custom_name")
 $( document ).ready(function() 
 {    
 $('#maintab').hide();
