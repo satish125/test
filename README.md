@@ -1778,6 +1778,16 @@ $('#dgotherallow').datagrid('reload');
 }
 }
 /////
-
+/*
+        var a=document.getElementsByName("dd")[0].value;
+            document.getElementsByName("sow")[0].previousSibling.setAttribute("maxlength",10)
+            $( "select" )
+  .change(function () {
+    var str = "";
+    $( "select option:selected" ).each(function() {
+      str += $( this ).text() + " ";
+    });
+    $( "div" ).text( str );
+*/
 </script>
 
