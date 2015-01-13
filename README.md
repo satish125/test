@@ -1788,6 +1788,7 @@ $('#dgotherallow').datagrid('reload');
       str += $( this ).text() + " ";
     });
     $( "div" ).text( str );
+    https://blog.oio.de/2010/11/08/how-to-create-a-loading-animation-spinner-using-jquery/
 */
 </script>
 
